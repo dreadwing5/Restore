@@ -21,11 +21,15 @@ export const counterSlice = createSlice({
   },
 });
 
-export function increment(amount = 1) {
+export const { increment, decrement } = counterSlice.actions;
+
+/* legacy implementation */
+
+export function incrementLegacy(amount = 1) {
   return { type: "increment", payload: amount };
 }
 
-export function decrement(amount = 1) {
+export function decrementLegacy(amount = 1) {
   return { type: "decrement", payload: amount };
 }
 
