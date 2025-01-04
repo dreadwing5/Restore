@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 export type CounterState = {
   data: number;
 };
@@ -5,6 +7,19 @@ export type CounterState = {
 const initialState: CounterState = {
   data: 42,
 };
+
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment: (state, action) => {
+      state.data += action.payload; // uses library immer to mutate the state
+    },
+    decrement: (state, action) => {
+      state.data -= action.payload;
+    },
+  },
+});
 
 export function increment(amount = 1) {
   return { type: "increment", payload: amount };

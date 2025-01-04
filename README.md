@@ -39,6 +39,17 @@ This project serves as a practical implementation guide for modern frontend deve
 - Responsive UI with Material UI
 - Clean and maintainable code structure
 
+## 📚 Table of Contents
+
+- [Purpose](#-purpose)
+- [Tech Stack](#-tech-stack)
+- [Key Features](#-key-features)
+- [Documentation](#-documentation)
+  - [Redux Overview](docs/redux-overview.md)
+  - [Redux Toolkit Guide](docs/redux-toolkit-guide.md)
+  - [State Immutability](docs/state-immutability.md)
+- [Learning Resources](#-learning-resources)
+
 ## 📚 Learning Resources
 
 This project is developed following Neil Cummings' course on [Building an E-commerce Store with .NET and React](https://deloittedevelopment.udemy.com/course/learn-to-build-an-e-commerce-store-with-dotnet-react-redux/).
