@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { counterSlice } from "../../features/contact/conterReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { catelogApi } from "../../features/catalog/catelogApi";
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
+    [catelogApi.reducerPath]: catelogApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(catelogApi.middleware), // responsible for handling the api requests, help us with caching, retrying, etc and capture errors
 });
 
 // Typescript compatibility (https://redux-toolkit.js.org/usage/usage-with-typescript)
