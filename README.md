@@ -53,19 +53,20 @@ This project is developed following Neil Cummings' course on [Building an E-comm
 
 ## 🏗 Project Structure
 
-src/
-├── app/
-│ ├── store/ # Redux store configuration
-│ ├── layout/ # Layout components
-│ ├── models/ # TypeScript interfaces and types
-│ ├── modals/ # Modal components and logic
-│ └── routes/ # Route definitions
-├── features/
-│ ├── catalog/ # Product catalog feature
-│ ├── basket/ # Shopping basket feature
-│ └── checkout/ # Checkout feature
-├── components/ # Shared components
-└── utils/ # Utility functions
+```src/
+    ├── app/
+    │   ├── store/    # Redux store configuration
+    │   ├── layout/   # Layout components
+    │   ├── models/   # TypeScript interfaces and types
+    │   ├── modals/   # Modal components and logic
+    │   └── routes/   # Route definitions
+    ├── features/
+    │   ├── catalog/  # Product catalog feature
+    │   ├── basket/   # Shopping basket feature
+    │   └── checkout/ # Checkout feature
+    ├── components/   # Shared components
+    └── utils/        # Utility functions
+```
 
 ## 🚀 Getting Started
 
