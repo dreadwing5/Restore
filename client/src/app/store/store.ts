@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { catelogApi } from "../../features/catalog/catelogApi";
+import { uiSlice } from "../layout/uiSlice";
 
 export const store = configureStore({
   reducer: {
     [catelogApi.reducerPath]: catelogApi.reducer,
+    ui: uiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(catelogApi.middleware), // responsible for handling the api requests, help us with caching, retrying, etc and capture errors
