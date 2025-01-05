@@ -34,15 +34,13 @@ export const baseQueryWithErrorHandling = async (
         ? result.error.originalStatus
         : result.error.status;
 
-    console.log(result.error);
-
     const responseData = result.error.data as ErrorResponse;
 
     switch (originalStatus) {
       case 400:
         if (typeof responseData === "string") toast.error(responseData);
         else if ("errors" in responseData) {
-          toast.error("validation error");
+          throw Object.values(responseData.errors).flat().join(", ");
         } else {
           toast.error(responseData.title);
         }
