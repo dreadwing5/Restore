@@ -39,11 +39,13 @@ namespace API.Controllers
             basket.AddItem(product, quantity);
 
             var result = await context.SaveChangesAsync() > 0;
+            System.Console.WriteLine("I am, stupid");
 
             if (result) return CreatedAtAction(nameof(GetBasket), basket.ToDto()); // returns the location header
 
             return BadRequest("Problem adding item to basket");
         }
+
 
         private Basket CreateBasket()
         {
@@ -62,11 +64,18 @@ namespace API.Controllers
 
             // get basket
 
+            if (basket == null) return BadRequest("Unable to reterive basket");
+
+            basket.RemoveItem(productId, quantity);
+
+            var result = await context.SaveChangesAsync() > 0;
             // remove item from basket or reduce quantity
 
             // save basket
 
-            return Ok();
+            if (result) return Ok();
+
+            return BadRequest("Problem removing item from basket");
         }
 
         private async Task<Basket?> RetrieveBasket()
