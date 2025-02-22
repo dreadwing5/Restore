@@ -3,6 +3,12 @@ import { baseQueryWithErrorHandling } from "../../app/api/baseApi";
 import { Basket, Item } from "../../app/models/basket";
 import { Product } from "../../app/models/product";
 
+// Type guard to check if the product is a BasketItem
+function isBasketItem(product: Product | Item): product is Item {
+  // A Product does not have a quantity property
+  return (product as Item).quantity !== undefined;
+}
+
 export const basketApi = createApi({
   reducerPath: "basketApi",
   tagTypes: ["Basket"],
@@ -14,13 +20,18 @@ export const basketApi = createApi({
     }),
     addBasketItem: builder.mutation<
       Basket,
-      { product: Product; quantity: number }
+      { product: Product | Item; quantity: number }
     >({
-      query: ({ product, quantity }) => ({
-        url: "basket",
-        params: { productId: product.id, quantity },
-        method: "POST",
-      }),
+      query: ({ product, quantity }) => {
+        const productId = isBasketItem(product)
+          ? product.productId
+          : product.id;
+        return {
+          url: "basket",
+          params: { productId, quantity },
+          method: "POST",
+        };
+      },
       onQueryStarted: async (
         { product, quantity },
         { dispatch, queryFulfilled }
@@ -32,14 +43,19 @@ export const basketApi = createApi({
         // 4. Rollback the optimistic update if the database call fails
         const patchResult = dispatch(
           basketApi.util.updateQueryData("fetchBasket", undefined, (draft) => {
+            const productId = isBasketItem(product)
+              ? product.productId
+              : product.id;
             const existingItem = draft.items.find(
-              (item) => item.productId === product.id
+              (item) => item.productId === productId
             );
 
             if (existingItem) {
               existingItem.quantity += quantity;
             } else {
-              draft.items.push(new Item(product, quantity));
+              draft.items.push(
+                isBasketItem(product) ? product : new Item(product, quantity)
+              );
             }
           })
         );

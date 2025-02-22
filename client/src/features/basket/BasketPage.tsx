@@ -12,7 +12,7 @@ export default function BasketPage() {
     <Grid2 container spacing={2}>
       <Grid2 size={8}>
         {data.items.map((item) => (
-          <BasketItem item={item} />
+          <BasketItem item={item} key={item.productId} />
         ))}
       </Grid2>
     </Grid2>

@@ -2,7 +2,7 @@ namespace API.DTOs
 {
     public class BasketItemDto
     {
-        public int Id { get; set; }
+        public int productId { get; set; }
         public required string Name { get; set; }
         public long Price { get; set; }
         public required string PictureUrl { get; set; }

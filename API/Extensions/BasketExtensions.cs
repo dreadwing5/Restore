@@ -12,7 +12,7 @@ namespace API.Extensions
                 BasketId = basket.BasketId,
                 Items = [.. basket.Items.Select(item => new BasketItemDto
                 {
-                    Id = item.ProductId,
+                    productId = item.ProductId,
                     Name = item.Product.Name,
                     Price = item.Product.Price,
                     PictureUrl = item.Product.PictureUrl,
